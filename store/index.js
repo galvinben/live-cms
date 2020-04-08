@@ -15,12 +15,12 @@ export const mutations = {
 
 export const actions = {
   async nuxtServerInit({ commit }) {
-    let data = {
-      admin: true,
-      mainTitle: 'Title',
-      someWords:
-        'I am a blog post, about some cool shit. I am a blog post, about some cool shit. I am a blog post, about some cool shit. I am a blog post, about some cool shit. I am a blog post, about some cool shit. I am a blog post, about some cool shit. I am a blog post, about some cool shit. I am a blog post, about some cool shit. I am a blog post, about some cool shit. I am a blog post, about some cool shit. I am a blog post, about some cool shit. I am a blog post, about some cool shit. I am a blog post, about some cool shit. ',
-    }
+    // let data = {
+    //   admin: true,
+    //   mainTitle: 'Title',
+    //   someWords:
+    //     'I am a blog post, about some cool shit. I am a blog post, about some cool shit. I am a blog post, about some cool shit. I am a blog post, about some cool shit. I am a blog post, about some cool shit. I am a blog post, about some cool shit. I am a blog post, about some cool shit. I am a blog post, about some cool shit. I am a blog post, about some cool shit. I am a blog post, about some cool shit. I am a blog post, about some cool shit. I am a blog post, about some cool shit. I am a blog post, about some cool shit. ',
+    // }
     const data = await axios.get(`/.netlify/functions/getState`)
     Object.keys(data).forEach((key) => {
       commit('setState', { key, value: data[key] })
