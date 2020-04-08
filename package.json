@@ -1,0 +1,10 @@
+{
+  "name": "live-cms",
+  "scripts": {
+    "dev": "nuxt"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.656.0",
+    "nuxt": "^2.12.2"
+  }
+}
