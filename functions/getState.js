@@ -2,7 +2,11 @@ axios = require('axios')
 AWS = require('aws-sdk')
 
 exports.handler = async (event, context) => {
-  AWS.config.update({ region: 'eu-west-2' })
+  AWS.config.update({
+    region: 'eu-west-2',
+    secretAccessKey: process.env.SECRET_ACCESS_KEY_AWS,
+    accessKeyId: process.env.SECRET_ACCESS_KEY_AWS,
+  })
 
   var ddb = new AWS.DynamoDB({ apiVersion: '2012-08-10' })
 
