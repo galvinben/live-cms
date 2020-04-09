@@ -32,7 +32,7 @@ export default {
         `/.netlify/functions/saveStateToGit`,
         this.$store.state
       )
-      this.saving = res.status === 200 ? 'Saved!' : 'Failed'
+      this.saving = res.status === 201 ? 'Saved!' : 'Failed'
     },
   },
 }
