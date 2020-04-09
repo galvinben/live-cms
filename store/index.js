@@ -22,11 +22,30 @@ export const actions = {
   },
 
   async setStateOnCreated({ commit }) {
-    let res = await axios.get(`/.netlify/functions/getState`)
-    console.log(res)
-    let state = JSON.parse(res).body
-    Object.keys(state).forEach((key) => {
-      commit('setState', { key, value: state[key] })
+    AWS.config.update({
+      region: 'eu-west-2',
+      secretAccessKey: process.env.awsSecret,
+      accessKeyId: process.env.awsID,
+    })
+
+    var ddb = new AWS.DynamoDB({ apiVersion: '2012-08-10' })
+
+    var params = {
+      TableName: process.env.tableName,
+      Key: {
+        date: { S: 'latest' },
+      },
+    }
+
+    await ddb.getItem(params, async function(err, data) {
+      if (err) {
+        console.error(err)
+      } else {
+        let state = JSON.parse(data.Item.state.S)
+        Object.keys(state).forEach((key) => {
+          commit('setState', { key, value: state[key] })
+        })
+      }
     })
     return
   },
