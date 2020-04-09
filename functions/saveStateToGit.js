@@ -6,8 +6,9 @@ exports.handler = async (event, context) => {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' }
   }
-
+  console.log(event.body)
   const state = querystring.parse(event.body)
+  console.log(state)
 
   var github = new GitHub({
     token: process.env.GIT_AUTH,
