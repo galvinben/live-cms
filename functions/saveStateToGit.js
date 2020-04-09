@@ -25,5 +25,6 @@ exports.handler = async (event, context) => {
     }
   )
   console.log(res)
-  return res
+  if (res.status === 201) return { statusCode: 200, body: 'Saved' }
+  return { statusCode: 200, body: 'Failed' }
 }

@@ -7,7 +7,7 @@
       <Words stateRef="someWords" />
     </div>
     <button @click="save()">Save</button>
-    <div v-if="saving">Saving...</div>
+    <div>{{ saving }}</div>
   </div>
 </template>
 
@@ -19,7 +19,7 @@ export default {
   components: { Words },
   data: () => ({
     loading: true,
-    saving: false,
+    saving: '',
   }),
   async created() {
     await this.$store.dispatch('setStateOnCreated')
@@ -27,12 +27,12 @@ export default {
   },
   methods: {
     async save() {
-      this.saving = true
+      this.saving = 'Saving...'
       const res = await axios.post(
         `/.netlify/functions/saveStateToGit`,
         this.$store.state
       )
-      this.saving = false
+      this.saving = res.status === 200 ? 'Saved!' : 'Failed'
     },
   },
 }
