@@ -1,13 +1,19 @@
 <template>
   <div class="container">
     <div v-if="!admin">{{ words }}</div>
-    <div class="admin-container" @click="startEditing" v-if="!editing && admin">{{ words }}</div>
-    <textarea ref="editInput" @focusout="stopEditing" v-if="editing && admin" v-model="words" />
+    <div class="admin-container" @click="startEditing" v-if="!editing && admin">
+      {{ words }}
+    </div>
+    <textarea
+      ref="editInput"
+      @focusout="stopEditing"
+      v-if="editing && admin"
+      v-model="words"
+    />
   </div>
 </template>
 
 <script>
-
 export default {
   props: ['stateRef'],
   data: () => ({
@@ -18,17 +24,16 @@ export default {
       return this.$store.state.admin
     },
     words: {
-      get: function () {
-        return this.$store.state[this.stateRef]
+      get: function() {
+        return this.$store.state.content[this.stateRef]
       },
-      set: function (newValue) {
-        this.$store.dispatch('updateWords', {
+      set: function(newValue) {
+        this.$store.dispatch('content/updateWords', {
           stateRef: this.stateRef,
           newWords: newValue,
         })
-      }
-
-    }
+      },
+    },
   },
   methods: {
     startEditing(event) {

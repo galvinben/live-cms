@@ -22,7 +22,7 @@ export default {
     saving: '',
   }),
   async created() {
-    await this.$store.dispatch('setStateOnCreated')
+    await this.$store.dispatch('/contentsetStateOnCreated')
     this.loading = false
   },
   methods: {
@@ -30,7 +30,7 @@ export default {
       this.saving = 'Saving...'
       const res = await axios.post(
         `/.netlify/functions/saveStateToGit`,
-        this.$store.state
+        this.$store.state.content
       )
       this.saving = res.status === 201 ? 'Saved!' : 'Failed'
     },
