@@ -6,6 +6,7 @@
   "dependencies": {
     "aws-sdk": "^2.656.0",
     "axios": "^0.19.2",
+    "github-api": "^3.3.0",
     "nuxt": "^2.12.2"
   },
   "devDependencies": {

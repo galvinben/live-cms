@@ -6,7 +6,7 @@
     <div class="para">
       <Words stateRef="someWords" />
     </div>
-    {{$store.state.mainTitle}}
+    <button @click="saveStateToGithub($store.state)">Save</button>
   </div>
 </template>
 
@@ -14,14 +14,14 @@
 import Words from '@/components/Words'
 
 export default {
-  components: {Words},
+  components: { Words },
   data: () => ({
-    loading: true
+    loading: true,
   }),
   async created() {
     await this.$store.dispatch('setStateOnCreated')
     this.loading = false
-  }
+  },
 }
 </script>
 
