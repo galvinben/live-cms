@@ -1,13 +1,18 @@
 export const state = () => ({
   admin: false,
+  loggingIn: false,
 })
 
 export const mutations = {
-  logIn(state, payload) {
+  logIn(state) {
     state.admin = true
+    state.loggingIn = false
   },
-  logOut(state, payload) {
+  logOut(state) {
     state.admin = false
+  },
+  setLoggingIn(state) {
+    state.loggingIn = true
   },
 }
 
@@ -17,5 +22,8 @@ export const actions = {
   },
   logOut({ commit }) {
     commit('logOut')
+  },
+  setLoggingIn({ commit }) {
+    commit('setLoggingIn')
   },
 }

@@ -4,12 +4,9 @@
 import netlifyIdentity from 'netlify-identity-widget'
 
 export default {
-  mounted() {
-    netlifyIdentity.open()
-    netlifyIdentity.on('login', (user) => {
-      this.$store.dispatch('logIn')
-      this.$router.push({ path: '/' })
-    })
+  created() {
+    this.$store.dispatch('setLoggingIn')
+    this.$router.push({ path: '/' })
   },
 }
 </script>
