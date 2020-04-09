@@ -6,12 +6,13 @@
     <div class="para">
       <Words stateRef="someWords" />
     </div>
-    <button @click="saveStateToGithub($store.state)">Save</button>
+    <button @click="save()">Save</button>
   </div>
 </template>
 
 <script>
 import Words from '@/components/Words'
+import axios from 'axios'
 
 export default {
   components: { Words },
@@ -21,6 +22,15 @@ export default {
   async created() {
     await this.$store.dispatch('setStateOnCreated')
     this.loading = false
+  },
+  methods: {
+    async save() {
+      const res = await axios.get(
+        `/.netlify/functions/saveStateToGit`,
+        this.$store.state
+      )
+      console.log(res)
+    },
   },
 }
 </script>
