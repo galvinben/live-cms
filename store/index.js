@@ -23,7 +23,8 @@ export const actions = {
 
   async setStateOnCreated({ commit }) {
     let res = await axios.get(`/.netlify/functions/getState`)
-    let state = JSON.parse(res.body)
+    console.log(res)
+    let state = JSON.parse(res).body
     Object.keys(state).forEach((key) => {
       commit('setState', { key, value: state[key] })
     })
