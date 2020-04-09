@@ -14,7 +14,7 @@ exports.handler = async (event, context) => {
   let res = await repository.writeFile(
     'master',
     'static/state.json',
-    JSON.stringify(event.body),
+    event.body,
     '🧙‍♂️Updated content via site',
     function(err) {
       if (err) {
