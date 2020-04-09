@@ -22,7 +22,7 @@ export default {
     saving: '',
   }),
   async created() {
-    await this.$store.dispatch('/contentsetStateOnCreated')
+    await this.$store.dispatch('content/setStateOnCreated')
     this.loading = false
   },
   methods: {
