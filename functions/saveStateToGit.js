@@ -20,7 +20,7 @@ exports.handler = async (event, context) => {
     '🧙‍♂️Updated content via site',
     function(err) {
       if (err) {
-        console.log('in error')
+        console.log(err)
         return { statusCode: 400, body: 'failed' }
       }
 
