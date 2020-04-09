@@ -6,9 +6,6 @@ exports.handler = async (event, context) => {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' }
   }
-  console.log(event.body)
-  const state = querystring.parse(event.body)
-  console.log(state)
 
   var github = new GitHub({
     token: process.env.GIT_AUTH,
@@ -17,18 +14,16 @@ exports.handler = async (event, context) => {
   let res = await repository.writeFile(
     'master',
     'static/state.json',
-    JSON.stringify(state),
+    JSON.stringify(event.body),
     '🧙‍♂️Updated content via site',
     function(err) {
       if (err) {
         console.log(err)
-        return { statusCode: 400, body: 'failed' }
       }
 
-      console.log('success>>')
-      return { statusCode: 200, body: 'success' }
+      console.log('success')
     }
   )
   console.log(res)
-  return res.data
+  return res
 }
