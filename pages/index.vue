@@ -6,8 +6,6 @@
     <div class="para">
       <Words stateRef="someWords" />
     </div>
-    <button @click="save()">Save</button>
-    <div>{{ saving }}</div>
   </div>
 </template>
 
