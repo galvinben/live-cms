@@ -29,6 +29,7 @@ export default {
     if (netlifyIdentity.currentUser()) {
       this.$store.dispatch('logIn')
     } else if (this.$store.state.loggingIn) {
+      this.$store.dispatch('unsetLoggingIn')
       netlifyIdentity.open()
     }
     netlifyIdentity.on('login', (user) => {

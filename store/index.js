@@ -14,6 +14,9 @@ export const mutations = {
   setLoggingIn(state) {
     state.loggingIn = true
   },
+  unsetLoggingIn(state) {
+    state.loggingIn = false
+  },
 }
 
 export const actions = {
@@ -25,5 +28,8 @@ export const actions = {
   },
   setLoggingIn({ commit }) {
     commit('setLoggingIn')
+  },
+  unsetLoggingIn({ commit }) {
+    commit('unsetLoggingIn')
   },
 }
