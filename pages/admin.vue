@@ -4,8 +4,7 @@
 import netlifyIdentity from 'netlify-identity-widget'
 
 export default {
-  mounted() {},
-  created() {
+  mounted() {
     netlifyIdentity.open()
     netlifyIdentity.on('login', (user) => {
       this.$store.dispatch('logIn')
