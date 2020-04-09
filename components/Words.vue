@@ -1,32 +1,34 @@
 <template>
   <div class="container">
     <div v-if="!admin">{{ words }}</div>
-    <div class="admin-container" @click="startEditing" v-if="!editing && admin">
-      {{ words }}
-    </div>
-    <textarea
-      ref="editInput"
-      @focusout="stopEditing"
-      v-if="editing && admin"
-      v-model="words"
-    />
+    <div class="admin-container" @click="startEditing" v-if="!editing && admin">{{ words }}</div>
+    <textarea ref="editInput" @focusout="stopEditing" v-if="editing && admin" v-model="words" />
   </div>
 </template>
 
 <script>
+
 export default {
   props: ['stateRef'],
   data: () => ({
     editing: false,
-    words: '',
   }),
-  mounted() {
-    this.words = this.$store.state[this.stateRef]
-  },
   computed: {
     admin() {
       return this.$store.state.admin
     },
+    words: {
+      get: function () {
+        return this.$store.state[this.stateRef]
+      },
+      set: function (newValue) {
+        this.$store.dispatch('updateWords', {
+          stateRef: this.stateRef,
+          newWords: newValue,
+        })
+      }
+
+    }
   },
   methods: {
     startEditing(event) {
@@ -35,10 +37,6 @@ export default {
     },
     stopEditing() {
       this.editing = false
-      this.$store.commit('updateWords', {
-        stateRef: this.stateRef,
-        newWords: this.words,
-      })
     },
   },
 }

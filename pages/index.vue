@@ -1,11 +1,12 @@
 <template>
-  <div class="card">
+  <div v-if="!loading" class="card">
     <div class="heading">
       <Words stateRef="mainTitle" />
     </div>
     <div class="para">
       <Words stateRef="someWords" />
     </div>
+    {{$store.state.mainTitle}}
   </div>
 </template>
 
@@ -14,7 +15,13 @@ import Words from '@/components/Words'
 
 export default {
   components: {Words},
-
+  data: () => ({
+    loading: true
+  }),
+  async created() {
+    await this.$store.dispatch('setStateOnCreated')
+    this.loading = false
+  }
 }
 </script>
 
