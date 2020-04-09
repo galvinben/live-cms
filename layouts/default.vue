@@ -28,12 +28,8 @@ export default {
     netlifyIdentity.init()
     if (netlifyIdentity.currentUser()) {
       this.$store.dispatch('logIn')
-    } else {
-      netlifyIdentity.open()
     }
-    netlifyIdentity.on('login', (user) => {
-      this.$store.dispatch('logIn')
-    })
+
     netlifyIdentity.on('logout', (user) => {
       this.$store.dispatch('logOut')
       this.loggedOut = true
