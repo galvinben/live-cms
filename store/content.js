@@ -3,6 +3,7 @@ import stateJSON from '@/static/state.json'
 export const state = () => ({
   mainTitle: '',
   someWords: '',
+  buttonWords: 'I be a link',
 })
 
 export const mutations = {

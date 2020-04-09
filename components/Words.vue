@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <div v-if="!admin">{{ words }}</div>
+    <div class="non-admin-container" @click="click" v-if="!admin">
+      {{ words }}
+    </div>
     <div class="admin-container" @click="startEditing" v-if="!editing && admin">
       {{ words }}
     </div>
@@ -15,7 +17,7 @@
 
 <script>
 export default {
-  props: ['stateRef'],
+  props: ['stateRef', 'click'],
   data: () => ({
     editing: false,
   }),
@@ -37,8 +39,12 @@ export default {
   },
   methods: {
     startEditing(event) {
-      this.editing = true
-      this.$nextTick(() => this.$refs.editInput.focus())
+      if (event.metaKey) {
+        this.click(event)
+      } else {
+        this.editing = true
+        this.$nextTick(() => this.$refs.editInput.focus())
+      }
     },
     stopEditing() {
       this.editing = false
@@ -48,6 +54,13 @@ export default {
 </script>
 
 <style scoped>
+.container,
+.non-admin-container,
+.admin-container {
+  display: inherit;
+  justify-content: inherit;
+  align-items: inherit;
+}
 .admin-container:hover {
   background: rgba(0, 0, 0, 0.05);
   cursor: pointer;

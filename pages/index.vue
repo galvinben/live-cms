@@ -6,6 +6,14 @@
     <div class="para">
       <Words stateRef="someWords" />
     </div>
+    <div class="button-container">
+      <div class="button">
+        <Words stateRef="buttonWords" :click="buttonClick" />
+      </div>
+      <transition name="fade">
+        <div v-if="clicked" class="clicked">Clicked!</div>
+      </transition>
+    </div>
   </div>
 </template>
 
@@ -18,6 +26,7 @@ export default {
   data: () => ({
     loading: true,
     saving: '',
+    clicked: false,
   }),
   async created() {
     await this.$store.dispatch('content/setStateOnCreated')
@@ -31,6 +40,12 @@ export default {
         this.$store.state.content
       )
       this.saving = res.status === 201 ? 'Saved!' : 'Failed'
+    },
+    buttonClick() {
+      this.clicked = true
+      window.setTimeout(() => {
+        this.clicked = false
+      }, 300)
     },
   },
 }
@@ -58,5 +73,42 @@ export default {
   width: auto;
   height: 300px;
   padding: 10px;
+}
+
+.button-container {
+  display: flex;
+}
+
+.clicked {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.button {
+  height: 60px;
+  width: 120px;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+}
+
+.button:hover {
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.2s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>

@@ -83,7 +83,7 @@ html {
 .actions {
   position: absolute;
   right: 10px;
-  top: 10px;
+  bottom: 10px;
   height: 30px;
   width: 150px;
   display: flex;
@@ -108,6 +108,7 @@ html {
   cursor: pointer;
   height: 30px;
   width: 70px;
+  margin: 2px;
 }
 
 .button:hover {
@@ -118,7 +119,7 @@ html {
   font-size: 3rem;
   position: absolute;
   right: 10px;
-  top: 10px;
+  bottom: 10px;
 }
 
 .fade-enter-active,
