@@ -25,6 +25,7 @@ exports.handler = async (event, context) => {
     }
   )
   console.log(res)
-  if (res.status === 200) return { statusCode: 201 }
-  return { statusCode: 200 }
+  if (res.status === 200)
+    return { statusCode: 201, body: JSON.stringify({ result: 'success' }) }
+  return { statusCode: 200, body: JSON.stringify({ result: 'failed' }) }
 }
