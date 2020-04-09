@@ -13,16 +13,21 @@ exports.handler = async (event, context) => {
     token: process.env.GIT_AUTH,
   })
   var repository = github.getRepo(process.env.GIT_USER, process.env.GIT_REPO)
-  return await repository.writeFile(
+  repository.writeFile(
     'master',
     'static/state.json',
     JSON.stringify(state),
     '🧙‍♂️Updated content via site',
     function(err) {
       if (err) {
+        console.log('in error')
         return { statusCode: 400, body: 'failed' }
       }
+
+      console.log('success>>')
       return { statusCode: 200, body: 'success' }
     }
   )
+  console.log('???')
+  return
 }
