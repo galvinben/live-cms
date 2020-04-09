@@ -21,7 +21,7 @@ exports.handler = async (event, context) => {
     if (err) {
       console.error(err)
     } else {
-      state = JSON.parse(data.Item.state.S)
+      state = data.Item.state.S
       console.log(state)
       return { status: 200, body: state }
     }
