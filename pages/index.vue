@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     async save() {
-      const res = await axios.get(
+      const res = await axios.post(
         `/.netlify/functions/saveStateToGit`,
         this.$store.state
       )
