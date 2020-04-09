@@ -17,7 +17,7 @@ exports.handler = async (event, context) => {
     },
   }
   let state
-  ddb.getItem(params, async function(err, data) {
+  ddb.getItem(params, function(err, data) {
     console.log('test')
     if (err) {
       console.log(err)
