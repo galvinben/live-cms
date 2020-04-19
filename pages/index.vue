@@ -6,23 +6,27 @@
     <div class="para">
       <Words stateRef="someWords" />
     </div>
+    <div class="image">
+      <Picture stateRef="imageOne" size="300" />
+    </div>
     <div class="button-container">
-      <div class="button">
-        <Words stateRef="buttonWords" :click="buttonClick" />
-      </div>
       <transition name="fade">
         <div v-if="clicked" class="clicked">Clicked!</div>
       </transition>
+      <div class="button">
+        <Words stateRef="buttonWords" :click="buttonClick" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import Words from '@/components/Words'
+import Picture from '@/components/Picture'
 import axios from 'axios'
 
 export default {
-  components: { Words },
+  components: { Words, Picture },
   data: () => ({
     loading: true,
     saving: '',
@@ -71,12 +75,20 @@ export default {
 
 .para {
   width: auto;
-  height: 300px;
+  height: 200px;
   padding: 10px;
+}
+
+.image {
+  height: 300px;
+  width: 300px;
+  align-self: center;
+  margin: 25px;
 }
 
 .button-container {
   display: flex;
+  justify-content: flex-end;
 }
 
 .clicked {

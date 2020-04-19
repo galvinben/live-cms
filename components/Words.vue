@@ -1,6 +1,10 @@
 <template>
   <div class="container">
-    <div class="non-admin-container" @click="click" v-if="!admin">
+    <div
+      class="non-admin-container"
+      @click="click ? click() : null"
+      v-if="!admin"
+    >
       {{ words }}
     </div>
     <div class="admin-container" @click="startEditing" v-if="!editing && admin">
@@ -39,8 +43,8 @@ export default {
   },
   methods: {
     startEditing(event) {
-      if (event.metaKey) {
-        this.click(event)
+      if (event.shiftKey) {
+        this.click ? this.click(event) : null
       } else {
         this.editing = true
         this.$nextTick(() => this.$refs.editInput.focus())
